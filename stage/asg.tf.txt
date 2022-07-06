@@ -1,0 +1,26 @@
+resource "aws_autoscaling_group" "dev" {
+  launch_configuration = aws_launch_configuration.dev_lc.name
+  vpc_zone_identifier  = data.aws_subnets.default.ids
+  target_group_arns = [aws_lb_target_group.dev_asg.arn]
+  health_check_type = "ELB"
+
+  name                 = "dev_asg"
+  min_size = var.min_size_asg
+  max_size = var.max_size_asg
+
+  instance_refresh {
+    strategy = "Rolling"
+    triggers = ["launch_configuration"]
+    preferences {
+      min_healthy_percentage = 50
+    }
+  }
+
+
+  tag {
+    key                 = "Name"
+    value               = "tf_dev_asg"
+    propagate_at_launch = true
+
+}
+}
