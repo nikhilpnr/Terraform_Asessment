@@ -1,10 +1,10 @@
-resource "aws_autoscaling_group" "dev" {
-  launch_configuration = aws_launch_configuration.dev_lc.name
+resource "aws_autoscaling_group" "stage" {
+  launch_configuration = aws_launch_configuration.stage_lc.name
   vpc_zone_identifier  = data.aws_subnets.default.ids
-  target_group_arns = [aws_lb_target_group.dev_asg.arn]
+  target_group_arns = [aws_lb_target_group.stage_asg.arn]
   health_check_type = "ELB"
 
-  name                 = "dev_asg"
+  name                 = "stage_asg"
   min_size = var.min_size_asg
   max_size = var.max_size_asg
 
@@ -19,7 +19,7 @@ resource "aws_autoscaling_group" "dev" {
 
   tag {
     key                 = "Name"
-    value               = "tf_dev_asg"
+    value               = "tf_stage_asg"
     propagate_at_launch = true
 
 }
