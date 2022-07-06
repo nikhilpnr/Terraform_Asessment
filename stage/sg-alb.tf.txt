@@ -1,5 +1,5 @@
-resource "aws_security_group" "dev_alb" {
-  name = "terraform-dev-alb"
+resource "aws_security_group" "stage_alb" {
+  name = "terraform-stage-alb"
 
   # Allow inbound HTTP requests
   ingress {
@@ -18,8 +18,8 @@ resource "aws_security_group" "dev_alb" {
   }
 }
 
-resource "aws_lb_target_group" "dev_asg" {
-  name     = "terraform-asg-dev"
+resource "aws_lb_target_group" "stage_asg" {
+  name     = "terraform-asg-stage"
   port     = 80
   protocol = "HTTP"
   vpc_id   = data.aws_vpc.default.id
