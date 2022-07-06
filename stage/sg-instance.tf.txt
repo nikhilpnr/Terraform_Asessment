@@ -1,5 +1,5 @@
-resource "aws_security_group" "dev_instance" {
-  name = "tf-dev-sg"
+resource "aws_security_group" "stage_instance" {
+  name = "tf-stage-sg"
 
   ingress {
     from_port   = "0"
