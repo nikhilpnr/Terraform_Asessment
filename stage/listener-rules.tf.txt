@@ -1,5 +1,5 @@
-resource "aws_lb_listener_rule" "dev-asg" {
-  listener_arn = aws_lb_listener.dev_http.arn
+resource "aws_lb_listener_rule" "stage-asg" {
+  listener_arn = aws_lb_listener.stage_http.arn
   priority     = 100
 
   condition {
@@ -10,6 +10,6 @@ resource "aws_lb_listener_rule" "dev-asg" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.dev_asg.arn
+    target_group_arn = aws_lb_target_group.stage_asg.arn
   }
 }
