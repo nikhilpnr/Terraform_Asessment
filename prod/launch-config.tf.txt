@@ -1,7 +1,7 @@
-resource "aws_launch_configuration" "dev_lc" {
+resource "aws_launch_configuration" "prod_lc" {
   image_id        = var.ami_id
   instance_type   = var.instance_type
-  security_groups = [aws_security_group.dev_instance.id]
+  security_groups = [aws_security_group.prod_instance.id]
   associate_public_ip_address = true
   name_prefix = "Launch_config-"
   user_data   = file("./script.sh")
